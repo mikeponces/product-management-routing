@@ -1,0 +1,49 @@
+<h2>Admin Dashboard</h2>
+<div class="d-flex justify-content-between mb-4">
+    <button class="btn btn-primary" (click)="showAddForm = !showAddForm">
+        {{ showAddForm ? 'Cancel' : 'Add New Product' }}
+    </button>
+    <button class="btn btn-outline-danger" (click)="logout()">Logout</button>
+</div>
+<div *ngIf="showAddForm" class="card mb-4">
+    <div class="card-body">
+        <h5 class="card-title">Add New Product</h5>
+        <div class="mb-3">
+            <label for="name" class="form-label">Name</label>
+            <input type="text" class="form-control" id="name" [(ngModel)]="newProduct.name">
+        </div>
+        <div class="mb-3">
+            <label for="price" class="form-label">Price</label>
+            <input type="number" class="form-control" id="price" [(ngModel)]="newProduct.price">
+        </div>
+        <div class="mb-3">
+            <label for="description" class="form-label">Description</label>
+            <textarea class="form-control" id="description" rows="3" [(ngModel)]="newProduct.description"></textarea>
+        </div>
+        <button class="btn btn-success" (click)="addProduct()">Save Product</button>
+    </div>
+</div>
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Description</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let product of products">
+                <td>{{ product.id }}</td>
+                <td>{{ product.name }}</td>
+                <td>${{ product.price.toFixed(2) }}</td>
+                <td>{{ product.description }}</td>
+                <td>
+                    <button class="btn btn-sm btn-danger" (click)="deleteProduct(product.id)">Delete</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

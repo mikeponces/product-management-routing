@@ -1,0 +1,16 @@
+<h2>Products</h2>
+<div class="row">
+    <div class="col-md-8">
+        <div class="list-group">
+            <div *ngFor="let product of products" class="list-group-item list-group-itemaction">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">{{ product.name }}</h5>
+                    <small>${{ product.price.toFixed(2) }}</small>
+                </div>
+                <p class="mb-1">{{ product.description }}</p>
+                <button class="btn btn-sm btn-info" (click)="viewProduct(product.id)">View
+                    Details</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,41 @@
+<div *ngIf="product">
+    <h2>
+        <a routerLink="/products" class="btn btn-sm btn-outline-secondary me-2">
+            <i class="bi bi-arrow-left"></i> Back
+        </a>
+        {{ product.name }}
+    </h2>
+    <div *ngIf="!isEditing" class="card">
+        <div class="card-body">
+            <h5 class="card-title">{{ product.name }}</h5>
+            <h6 class="card-subtitle mb-2 text-muted">${{ product.price.toFixed(2) }}</h6>
+            <p class="card-text">{{ product.description }}</p>
+            <button class="btn btn-primary" (click)="startEditing()">Edit</button>
+        </div>
+    </div>
+    <div *ngIf="isEditing" class="card">
+        <div class="card-body">
+            <h5 class="card-title">Edit Product</h5>
+            <div class="mb-3">
+                <label for="name" class="form-label">Name</label>
+                <input type="text" class="form-control" id="name" [(ngModel)]="editedProduct!.name"
+                    (ngModelChange)="onFieldChange()">
+            </div>
+            <div class="mb-3">
+                <label for="price" class="form-label">Price</label>
+                <input type="number" class="form-control" id="price" [(ngModel)]="editedProduct!.price"
+                    (ngModelChange)="onFieldChange()">
+            </div>
+            <div class="mb-3">
+                <label for="description" class="form-label">Description</label>
+                <textarea class="form-control" id="description" rows="3" [(ngModel)]="editedProduct!.description"
+                    (ngModelChange)="onFieldChange()"></textarea>
+            </div>
+            <button class="btn btn-success me-2" (click)="saveChanges()">Save</button>
+            <button class="btn btn-secondary" (click)="cancelEditing()">Cancel</button>
+        </div>
+    </div>
+</div>
+<div *ngIf="!product" class="alert alert-warning">
+    Product not found!
+</div>

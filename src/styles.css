@@ -1,1 +1,8 @@
-/* You can add global styles to this file, and also import other style files */
+.navbar-nav .active {
+    font-weight: bold;
+    color: #007bff !important;
+}
+
+.card {
+    margin-bottom: 20px;
+}
