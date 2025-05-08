@@ -5,6 +5,7 @@ import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { Observable } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-product-detail',
@@ -17,12 +18,18 @@ export class ProductDetailComponent implements OnInit, CanComponentDeactivate {
   editedProduct?: Product;
   isEditing = false;
   hasUnsavedChanges = false;
+  isLoggedIn = false;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private productsService: ProductsService
-  ) { }
+    private productsService: ProductsService,
+    private authService: AuthService
+  ) {
+    this.authService.isLoggedIn$.subscribe(isLoggedIn => {
+      this.isLoggedIn = isLoggedIn;
+    });
+  }
 
   ngOnInit(): void {
     // Get the product ID from the route parameters

@@ -10,7 +10,7 @@
             <h5 class="card-title">{{ product.name }}</h5>
             <h6 class="card-subtitle mb-2 text-muted">${{ product.price.toFixed(2) }}</h6>
             <p class="card-text">{{ product.description }}</p>
-            <button class="btn btn-primary" (click)="startEditing()">Edit</button>
+            <button *ngIf="isLoggedIn" class="btn btn-primary" (click)="startEditing()">Edit</button>
         </div>
     </div>
     <div *ngIf="isEditing" class="card">
